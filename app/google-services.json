@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "625425417117",
+    "project_id": "smswh-d5c0c",
+    "storage_bucket": "smswh-d5c0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625425417117:android:4ad5c678491bf8d0eea574",
+        "android_client_info": {
+          "package_name": "com.example.smswhapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625425417117-1b95b7bh13mkpaekv61i8oi8pnnc697c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBoil3uEiTgQ10qKMNhCIIbXAyzmCcee8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625425417117-1b95b7bh13mkpaekv61i8oi8pnnc697c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
