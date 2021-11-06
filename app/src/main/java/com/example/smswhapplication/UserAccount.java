@@ -10,10 +10,13 @@ public class UserAccount {
     private String pw;
     private String profileUri;
     private String kkanbu = null;
+    private Integer age;
+    private Integer interest;
 
     public String getKkanbu() { return kkanbu; }
 
     public void setKkanbu(String kkanbu) { this.kkanbu = kkanbu; }
+
 
     public String getIdToken() {
         return idToken;
@@ -77,5 +80,21 @@ public class UserAccount {
 
     public void setProfileUri(String profileUri) {
         this.profileUri = profileUri;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Integer getInterest() {
+        return interest;
+    }
+
+    public void setInterest(Integer interest) {
+        this.interest = interest;
     }
 }

@@ -20,6 +20,15 @@
             android:name=".KkanbuActivity"
             android:exported="true" />
         <activity
+            android:name=".MatchInterestActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MatchAgeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MyInfoActivity"
+            android:exported="true" />
+        <activity
             android:name=".MatchingStartActivity"
             android:exported="true" />
         <activity
