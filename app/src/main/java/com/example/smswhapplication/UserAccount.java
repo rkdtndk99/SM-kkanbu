@@ -9,7 +9,7 @@ public class UserAccount {
     private String email;
     private String pw;
     private String profileUri;
-    private String kkanbu = null;
+    private String kkanbu ;
     private Integer age;
     private Integer interest;
 

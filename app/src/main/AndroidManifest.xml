@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SMSWHApplication">
         <activity
+            android:name=".NoKkanbuActivity"
+            android:exported="true" />
+        <activity
             android:name=".ChatActivity"
             android:exported="true" />
         <activity

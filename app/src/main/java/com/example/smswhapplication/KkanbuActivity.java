@@ -36,7 +36,7 @@ public class KkanbuActivity extends AppCompatActivity {
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference = storage.getReference().child("UserProfile");
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference = firebaseDatabase.getReference("smswh2");
+    private DatabaseReference databaseReference = firebaseDatabase.getReference("SMSWH");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

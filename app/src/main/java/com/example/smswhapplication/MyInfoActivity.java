@@ -1,36 +1,93 @@
 package com.example.smswhapplication;
 
+import static java.lang.String.valueOf;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MyInfoActivity extends AppCompatActivity {
-    private final BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @SuppressLint("NonConstantResourceId")
+    private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = firebaseDatabase.getReference("SMSWH");
+    private FirebaseStorage firebaseStorage;
+    private StorageReference storageReference;
+
+    private String kkanbuUid;
+    TextView tv_myname, tv_email, tv_mybday, tv_mymajor, tv_mynum;
+    ImageView iv_myprofile;
+
+    private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
+            databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (!task.isSuccessful()) {
+                        Log.e("firebase", "Error getting data", task.getException());
+                        kkanbuUid = "";
+                    }
+                    else {
+                        kkanbuUid = String.valueOf(task.getResult().getValue());
+                    }
+                }
+            });
+            Log.i("KkanbuUid", kkanbuUid);
             switch(item.getItemId()){
                 case R.id.icon_kkanbu:
-                    Intent intent1 = new Intent(MyInfoActivity.this, KkanbuActivity.class);
-                    startActivity(intent1);
-                    overridePendingTransition(0, 0);
-                    finish();
-                    return true;
+                    if(!kkanbuUid.equals("")) {
+                        Intent intent1_1 = new Intent(MyInfoActivity.this, KkanbuActivity.class);
+                        intent1_1.putExtra("kkanbu-uid", kkanbuUid);
+                        startActivity(intent1_1);
+                        overridePendingTransition(0, 0);
+                        finish();
+                        return true;
+                    }
+                    else{
+                        Intent intent1_2 = new Intent(MyInfoActivity.this, NoKkanbuActivity.class);
+                        startActivity(intent1_2);
+                        overridePendingTransition(0, 0);
+                        finish();
+                        return true;
+                    }
+//                    overridePendingTransition(0, 0);
+//                    finish();
+//                    return true;
                 case R.id.icon_matching:
                     Intent intent2 = new Intent(MyInfoActivity.this, MatchingStartActivity.class);
                     startActivity(intent2);
                     overridePendingTransition(0, 0);
-                    finish();
-                    return true;
-                default:
+
                     return true;
             }
+            return false;
         }
     };
 
@@ -42,5 +99,31 @@ public class MyInfoActivity extends AppCompatActivity {
         @SuppressLint("ResourceType")
         BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
+
+        firebaseStorage = FirebaseStorage.getInstance();
+        storageReference = firebaseStorage.getReference().child("UserProfile");
+
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+
+        tv_myname = findViewById(R.id.tv_myname);
+        tv_email = findViewById(R.id.tv_email);
+        tv_mybday = findViewById(R.id.tv_mybday);
+        tv_mymajor = findViewById(R.id.tv_mymajor);
+        tv_mynum = findViewById(R.id.tv_mynum);
+
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount user = dataSnapshot.getValue(UserAccount.class);
+                tv_myname.setText(user.getName());
+                tv_email.setText(user.getEmail());
+                tv_mybday.setText(user.getBirthday());
+                tv_mymajor.setText(user.getMajor());
+                tv_mynum.setText(user.getStuNum());
+            }
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("파이어베이스", "Error getting data");
+            }
+        };
+        databaseReference.child("UserAccount").child(firebaseUser.getUid()).addValueEventListener(valueEventListener);
     }
 }
