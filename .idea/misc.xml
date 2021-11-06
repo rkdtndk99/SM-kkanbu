@@ -5,7 +5,9 @@
       <map>
         <entry key="..\:/SMSWH/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/SMSWH/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/SMSWH/app/src/main/res/layout/activity_matching_start.xml" value="0.1" />
         <entry key="..\:/SMSWH/app/src/main/res/layout/activity_sign_up.xml" value="0.22" />
+        <entry key="..\:/SMSWH/app/src/main/res/menu/navigation_items.xml" value="0.22" />
       </map>
     </option>
   </component>
