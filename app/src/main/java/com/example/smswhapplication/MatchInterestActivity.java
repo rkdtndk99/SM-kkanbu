@@ -116,11 +116,15 @@ public class MatchInterestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(MatchInterestActivity.this, MyInfoActivity.class);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-                finish();
+                changeActivity();
             }
         });
+    }
+
+    public void changeActivity(){
+        Intent intent = new Intent(MatchInterestActivity.this, MyInfoActivity.class);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+        finish();
     }
 }
