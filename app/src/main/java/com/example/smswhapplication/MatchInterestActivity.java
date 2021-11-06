@@ -7,14 +7,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MatchingStartActivity extends AppCompatActivity {
-
-    Button btn_match;
+public class MatchInterestActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -27,7 +23,7 @@ public class MatchingStartActivity extends AppCompatActivity {
                     //finish();
                     return true;
                 case R.id.icon_me:
-                    Intent intent2 = new Intent(MatchingStartActivity.this, MyInfoActivity.class);
+                    Intent intent2 = new Intent(MatchInterestActivity.this, MyInfoActivity.class);
                     startActivity(intent2);
                     overridePendingTransition(0, 0);
                     finish();
@@ -40,21 +36,10 @@ public class MatchingStartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_matching_start);
+        setContentView(R.layout.activity_match_interest);
 
         @SuppressLint("ResourceType")
         BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
-
-        btn_match = findViewById(R.id.btn_match);
-        btn_match.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MatchingStartActivity.this, MatchAgeActivity.class);
-                startActivity(i);
-                overridePendingTransition(0, 0);
-                finish();
-            }
-        });
     }
 }
