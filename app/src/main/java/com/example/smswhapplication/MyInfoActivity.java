@@ -11,15 +11,16 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MyInfoActivity extends AppCompatActivity {
-    private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+    private final BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @SuppressLint("NonConstantResourceId")
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch(item.getItemId()){
                 case R.id.icon_kkanbu:
-                    //Intent intent1 = new Intent(MatchingStartActivity.this, MyKkanbuActivity.class);
-                    //startActivity(intent1);
-                    //overridePendingTransition(0, 0);
-                    //finish();
+                    Intent intent1 = new Intent(MyInfoActivity.this, KkanbuActivity.class);
+                    startActivity(intent1);
+                    overridePendingTransition(0, 0);
+                    finish();
                     return true;
                 case R.id.icon_matching:
                     Intent intent2 = new Intent(MyInfoActivity.this, MatchingStartActivity.class);
@@ -27,8 +28,9 @@ public class MyInfoActivity extends AppCompatActivity {
                     overridePendingTransition(0, 0);
                     finish();
                     return true;
+                default:
+                    return true;
             }
-            return false;
         }
     };
 

@@ -28,15 +28,15 @@ public class MatchInterestActivity extends AppCompatActivity {
     Dialog dialog;
     ImageView iv_closeDialog;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+    private final BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch(item.getItemId()){
                 case R.id.icon_kkanbu:
-                    //Intent intent1 = new Intent(MatchingStartActivity.this, MyKkanbuActivity.class);
-                    //startActivity(intent1);
-                    //overridePendingTransition(0, 0);
-                    //finish();
+                    Intent intent1 = new Intent(MatchInterestActivity.this, KkanbuActivity.class);
+                    startActivity(intent1);
+                    overridePendingTransition(0, 0);
+                    finish();
                     return true;
                 case R.id.icon_me:
                     Intent intent2 = new Intent(MatchInterestActivity.this, MyInfoActivity.class);
@@ -44,8 +44,9 @@ public class MatchInterestActivity extends AppCompatActivity {
                     overridePendingTransition(0, 0);
                     finish();
                     return true;
+                default:
+                    return true;
             }
-            return false;
         }
     };
 

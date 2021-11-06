@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -16,15 +19,16 @@ public class MatchingStartActivity extends AppCompatActivity {
 
     Button btn_match;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+    private final BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @SuppressLint("NonConstantResourceId")
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch(item.getItemId()){
                 case R.id.icon_kkanbu:
-                    //Intent intent1 = new Intent(MatchingStartActivity.this, MyKkanbuActivity.class);
-                    //startActivity(intent1);
-                    //overridePendingTransition(0, 0);
-                    //finish();
+                    Intent intent1 = new Intent(MatchingStartActivity.this, KkanbuActivity.class);
+                    startActivity(intent1);
+                    overridePendingTransition(0, 0);
+                    finish();
                     return true;
                 case R.id.icon_me:
                     Intent intent2 = new Intent(MatchingStartActivity.this, MyInfoActivity.class);
@@ -32,8 +36,9 @@ public class MatchingStartActivity extends AppCompatActivity {
                     overridePendingTransition(0, 0);
                     finish();
                     return true;
+                default:
+                    return true;
             }
-            return false;
         }
     };
 

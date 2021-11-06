@@ -49,18 +49,16 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
-                                    Intent intent = new Intent(LoginActivity.this, MatchingStartActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else{
+                                    login_email.setText("");
+                                    login_pw.setText("");
                                     Toast.makeText(LoginActivity.this, "로그인 실패" ,Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
-
-                Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent1);
-                finish();
             }
         });
 

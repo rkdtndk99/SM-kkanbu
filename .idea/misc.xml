@@ -3,14 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/SMSWH/app/src/main/res/layout/activity_kkanbu.xml" value="0.19739583333333333" />
         <entry key="..\:/SMSWH/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/SMSWH/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/SMSWH/app/src/main/res/layout/activity_match_age.xml" value="0.14666666666666667" />
         <entry key="..\:/SMSWH/app/src/main/res/layout/activity_match_interest.xml" value="0.16666666666666666" />
-        <entry key="..\:/SMSWH/app/src/main/res/layout/activity_matching_start.xml" value="0.1" />
+        <entry key="..\:/SMSWH/app/src/main/res/layout/activity_matching_start.xml" value="0.12" />
         <entry key="..\:/SMSWH/app/src/main/res/layout/activity_my_info.xml" value="0.1" />
         <entry key="..\:/SMSWH/app/src/main/res/layout/activity_sign_up.xml" value="0.22" />
         <entry key="..\:/SMSWH/app/src/main/res/layout/dialog_match_success.xml" value="0.16666666666666666" />
+        <entry key="..\:/SMSWH/app/src/main/res/menu/menu.xml" value="0.11574074074074074" />
         <entry key="..\:/SMSWH/app/src/main/res/menu/navigation_items.xml" value="0.22" />
       </map>
     </option>

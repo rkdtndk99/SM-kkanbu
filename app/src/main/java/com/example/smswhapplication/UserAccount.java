@@ -9,8 +9,14 @@ public class UserAccount {
     private String email;
     private String pw;
     private String profileUri;
+    private String kkanbu = null;
     private Integer age;
     private Integer interest;
+
+    public String getKkanbu() { return kkanbu; }
+
+    public void setKkanbu(String kkanbu) { this.kkanbu = kkanbu; }
+
 
     public String getIdToken() {
         return idToken;

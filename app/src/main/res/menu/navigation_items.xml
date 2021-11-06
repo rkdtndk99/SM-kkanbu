@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/icon_matching"
         android:title="Matching"
-        android:icon="@drawable/promise2" />
+        android:icon="@drawable/promise2"
+        app:showAsAction="always"
+        />
     <item
         android:id="@+id/icon_kkanbu"
         android:title="My Kkanbu"
-        android:icon="@drawable/greeting_two"/>
+        android:icon="@drawable/greeting_two"
+        app:showAsAction="always"/>
     <item
         android:id="@+id/icon_me"
         android:title="My Info"
-        android:icon="@drawable/greeting_alone"/>
+        android:icon="@drawable/greeting_alone"
+        app:showAsAction="always"/>
 </menu>
