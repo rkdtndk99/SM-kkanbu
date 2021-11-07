@@ -7,13 +7,13 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/greeting_alone" />
 
     <TextView
         android:id="@+id/kkanbu_major"
@@ -61,14 +61,15 @@
 
     <ImageButton
         android:id="@+id/chat_btn"
-        android:layout_width="57dp"
-        android:layout_height="53dp"
+        android:layout_width="60dp"
+        android:layout_height="55dp"
         android:layout_marginTop="50dp"
-        android:src="@drawable/chat"
+        android:src="@drawable/chatbubble"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/text"
