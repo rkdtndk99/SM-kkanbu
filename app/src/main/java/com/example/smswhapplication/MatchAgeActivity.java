@@ -31,13 +31,15 @@ public class MatchAgeActivity extends AppCompatActivity {
                     //startActivity(intent1);
                     //overridePendingTransition(0, 0);
                     //finish();
-                    return true;
+                    break;
                 case R.id.icon_me:
                     Intent intent2 = new Intent(MatchAgeActivity.this, MyInfoActivity.class);
                     startActivity(intent2);
                     overridePendingTransition(0, 0);
                     finish();
-                    return true;
+                    break;
+                default:
+                    break;
             }
             return false;
         }

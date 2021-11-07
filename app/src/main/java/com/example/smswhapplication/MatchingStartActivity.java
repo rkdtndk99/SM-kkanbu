@@ -30,7 +30,6 @@ public class MatchingStartActivity extends AppCompatActivity {
                     Intent intent2 = new Intent(MatchingStartActivity.this, MyInfoActivity.class);
                     startActivity(intent2);
                     overridePendingTransition(0, 0);
-                    finish();
                     return true;
             }
             return false;

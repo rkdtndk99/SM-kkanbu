@@ -9,9 +9,11 @@ public class UserAccount {
     private String email;
     private String pw;
     private String profileUri;
-    private String kkanbu = null;
+    private String kkanbu;
     private Integer age;
     private Integer interest;
+
+    public UserAccount(){}
 
     public String getKkanbu() { return kkanbu; }
 
@@ -96,5 +98,21 @@ public class UserAccount {
 
     public void setInterest(Integer interest) {
         this.interest = interest;
+    }
+
+    public UserAccount(String idToken, String name, String major, String birthday, Integer interest,
+                       String stuNum, Integer age, String pw, String profileUri, String kkanbu, String email) {
+        this.name = name;
+        this.idToken = idToken;
+        this.birthday = birthday;
+        this.major = major;
+        this.age = age;
+        this.interest = interest;
+        this.profileUri = profileUri;
+        this.email = email;
+        this.kkanbu = kkanbu;
+        this. pw = pw;
+        this. stuNum = stuNum;
+
     }
 }
