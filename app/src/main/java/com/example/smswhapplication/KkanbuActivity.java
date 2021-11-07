@@ -29,26 +29,19 @@ public class KkanbuActivity extends AppCompatActivity {
 
     private TextView kkanbu_name, kkanbu_major, kkanbu_stunum, kkanbu_birthday;
     private ImageButton chat_btn;
-    private String usernum="", chatname="", username=".", kkanbuUid="";
+    private String usernum = "", chatname = "", username = ".", kkanbuUid = "";
 
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference = storage.getReference().child("UserProfile");
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference("SMSWH");
-<<<<<<< HEAD
-=======
     private DatabaseReference databaseReference2 = firebaseDatabase.getReference("SMSWH");
-    String a = "1";
->>>>>>> 413673fc6feed5040ef516dbe59bb6934e03f50b
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kkanbu);
-        if (a == "1") {
-            Log.i("111111111", a);
-        }
 
         kkanbu_name = (TextView) findViewById(R.id.kkanbu_name);
         kkanbu_major = (TextView) findViewById(R.id.kkanbu_major);
@@ -57,9 +50,7 @@ public class KkanbuActivity extends AppCompatActivity {
         chat_btn = (ImageButton) findViewById(R.id.chat_btn);
 
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-        if (a == "1") {
-            Log.i("2222222222", firebaseUser.getUid());
-        }
+
         // 데이터 받아오기 및 어댑터 데이터 추가 및 삭제 등..리스너 관리
         databaseReference.child("UserAccount").child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -70,11 +61,7 @@ public class KkanbuActivity extends AppCompatActivity {
                 username = current.getName();
                 usernum = current.getStuNum();
                 kkanbu_stunum.setText(kkanbuUid);
-                if (a == "1") {
-                    Log.i("333333", kkanbuUid);
-                    Log.i("44444", username);
-                    Log.i("555555", usernum);
-                }
+
                 databaseReference2.child("UserAccount").child(kkanbuUid).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -91,7 +78,7 @@ public class KkanbuActivity extends AppCompatActivity {
                         kkanbu_stunum.setText(s);
                         Log.i("0000000", s);
 
-                        if(Integer.parseInt(usernum) > Integer.parseInt(kkanbu_stunum.getText().toString()))
+                        if (Integer.parseInt(usernum) > Integer.parseInt(kkanbu_stunum.getText().toString()))
                             chatname = usernum;
                         else
                             chatname = kkanbu_stunum.getText().toString();
@@ -119,18 +106,7 @@ public class KkanbuActivity extends AppCompatActivity {
                 //Log.e("MainActivity", String.valueOf(databaseError.toException())); // 에러문 출력
             }
         });
-//
-//        if (a == "1") {
-//            Log.i("6666666", a);
-//            Log.i("7777777", username);
-//            Log.i("dhrlsgka", usernum);
-//        }
-
-
-
-
 
     }
-
 
 }

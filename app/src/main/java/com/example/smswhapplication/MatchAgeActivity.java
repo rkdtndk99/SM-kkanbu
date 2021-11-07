@@ -28,33 +28,19 @@ public class MatchAgeActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch(item.getItemId()){
                 case R.id.icon_kkanbu:
-<<<<<<< HEAD
                     Intent intent1 = new Intent(MatchAgeActivity.this, KkanbuActivity.class);
                     startActivity(intent1);
                     overridePendingTransition(0, 0);
                     finish();
                     return true;
-=======
-                    //Intent intent1 = new Intent(MatchingStartActivity.this, MyKkanbuActivity.class);
-                    //startActivity(intent1);
-                    //overridePendingTransition(0, 0);
-                    //finish();
-                    break;
->>>>>>> 413673fc6feed5040ef516dbe59bb6934e03f50b
                 case R.id.icon_me:
                     Intent intent2 = new Intent(MatchAgeActivity.this, MyInfoActivity.class);
                     startActivity(intent2);
                     overridePendingTransition(0, 0);
                     finish();
-<<<<<<< HEAD
                     return true;
                 default:
-                    return true;
-=======
-                    break;
-                default:
-                    break;
->>>>>>> 413673fc6feed5040ef516dbe59bb6934e03f50b
+                    return false;
             }
         }
     };

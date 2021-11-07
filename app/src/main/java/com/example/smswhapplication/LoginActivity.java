@@ -74,10 +74,6 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
-<<<<<<< HEAD
-=======
-
->>>>>>> 413673fc6feed5040ef516dbe59bb6934e03f50b
             }
         });
 
@@ -90,6 +86,4 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }
