@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/SMSWH/app/src/main/res/layout/activity_kkanbu.xml" value="0.3333333333333333" />
         <entry key="..\:/SMSWH/app/src/main/res/layout/activity_login.xml" value="0.14666666666666667" />
         <entry key="..\:/SMSWH/app/src/main/res/layout/activity_main.xml" value="0.1" />
@@ -17,6 +18,17 @@
         <entry key="..\:/SMSWH/app/src/main/res/layout/layout_login.xml" value="0.10460992907801418" />
         <entry key="..\:/SMSWH/app/src/main/res/menu/menu.xml" value="0.11574074074074074" />
         <entry key="..\:/SMSWH/app/src/main/res/menu/navigation_items.xml" value="0.22" />
+=======
+        <entry key="..\:/Users/kelly/AndroidStudioProjects/SMSWH/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.12916666666666668" />
+        <entry key="..\:/Users/kelly/AndroidStudioProjects/SMSWH/app/src/main/res/drawable/ic_launcher_background.xml" value="0.12916666666666668" />
+        <entry key="..\:/Users/kelly/AndroidStudioProjects/SMSWH/app/src/main/res/layout/activity_chat.xml" value="0.4" />
+        <entry key="..\:/Users/kelly/AndroidStudioProjects/SMSWH/app/src/main/res/layout/activity_kkanbu.xml" value="0.4" />
+        <entry key="..\:/Users/kelly/AndroidStudioProjects/SMSWH/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/kelly/AndroidStudioProjects/SMSWH/app/src/main/res/layout/activity_main.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/kelly/AndroidStudioProjects/SMSWH/app/src/main/res/layout/activity_no_kkanbu.xml" value="0.1375" />
+        <entry key="..\:/Users/kelly/AndroidStudioProjects/SMSWH/app/src/main/res/layout/kkanbu.xml" value="0.176" />
+        <entry key="..\:/Users/kelly/AndroidStudioProjects/SMSWH/app/src/main/res/menu/navigation_items.xml" value="0.264" />
+>>>>>>> 413673fc6feed5040ef516dbe59bb6934e03f50b
       </map>
     </option>
   </component>

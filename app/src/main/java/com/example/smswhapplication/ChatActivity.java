@@ -27,7 +27,7 @@ public class ChatActivity extends AppCompatActivity {
     private Button chat_send;
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference = firebaseDatabase.getReference("smswh2");
+    private DatabaseReference databaseReference = firebaseDatabase.getReference("SMSWH");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

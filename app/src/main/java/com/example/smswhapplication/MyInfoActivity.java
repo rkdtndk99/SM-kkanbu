@@ -54,44 +54,29 @@ public class MyInfoActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-
-//            databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//                @Override
-//                public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                    if (!task.isSuccessful()) {
-//                        Log.e("firebase", "Error getting data", task.getException());
-//                        kkanbuUid = "";
-//                    }
-//                    else {
-//                        kkanbuUid = String.valueOf(task.getResult().getValue());
-//                    }
-//                }
-//            });
             switch(item.getItemId()){
-//                case R.id.icon_kkanbu:
-//                    if(!kkanbuUid.equals("")) {
-//                        Intent intent1_1 = new Intent(MyInfoActivity.this, KkanbuActivity.class);
-//                        intent1_1.putExtra("kkanbu-uid", kkanbuUid);
-//                        startActivity(intent1_1);
-//                        overridePendingTransition(0, 0);
-//                        finish();
-//                        return true;
-//                    }
-//                    else{
-//                        Intent intent1_2 = new Intent(MyInfoActivity.this, NoKkanbuActivity.class);
-//                        startActivity(intent1_2);
-//                        overridePendingTransition(0, 0);
-//                        finish();
-//                        return true;
-//                    }
+                case R.id.icon_kkanbu:
+                    if(kkanbuUid != "") {
+                        Intent intent1_1 = new Intent(MyInfoActivity.this, KkanbuActivity.class);
+                        startActivity(intent1_1);
+                    }
+                    else{
+                        Intent intent1_2 = new Intent(MyInfoActivity.this, NoKkanbuActivity.class);
+                        startActivity(intent1_2);
+                    }
+                    overridePendingTransition(0, 0);
+                    return true;
+
                 case R.id.icon_matching:
                     Intent intent2 = new Intent(MyInfoActivity.this, MatchingStartActivity.class);
                     startActivity(intent2);
                     overridePendingTransition(0, 0);
-                    finish();
                     return true;
+
+                default :
+                    return false;
+
             }
-            return false;
         }
     };
 
@@ -124,6 +109,7 @@ public class MyInfoActivity extends AppCompatActivity {
                 tv_mybday.setText(user.getBirthday());
                 tv_mymajor.setText(user.getMajor());
                 tv_mynum.setText(user.getStuNum());
+                kkanbuUid = user.getKkanbu();
 
                 String uid = firebaseUser.getUid();;
                 StorageReference profileRef = storageReference.child(uid);
