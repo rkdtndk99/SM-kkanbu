@@ -46,7 +46,7 @@ public class MatchInterestActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private Vector<String> interest_v = new Vector<String>();
 
-    Button btn_school, btn_career, btn_hobby, btn_food, btn_to_kkanbu;
+    Button btn_school, btn_career, btn_hobby, btn_food, btn_to_kkanbu, btn_random, btn_talk;
     Dialog nokkanbu_dialog, yeskkanbu_dialog;
     ImageView iv_closeDialog;
 
@@ -89,6 +89,8 @@ public class MatchInterestActivity extends AppCompatActivity {
         btn_career = findViewById(R.id.btn_career);
         btn_hobby = findViewById(R.id.btn_hobby);
         btn_food = findViewById(R.id.btn_food);
+        btn_talk = findViewById(R.id.btn_talk);
+        btn_random = findViewById(R.id.btn_random);
 
         nokkanbu_dialog = new Dialog(this);
         nokkanbu_dialog.setContentView(R.layout.dialog_match_fail);
@@ -159,6 +161,44 @@ public class MatchInterestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(4);
+                databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if(task.isSuccessful()){
+                            String kkanbu = String.valueOf(task.getResult().getValue());
+                            getKkanbu(firebaseUser);
+                            if(kkanbu.equals("")) no_showDialog();
+                            else yes_showDialog();
+                        } else{
+                            Log.d("실패했음", " ");
+                        }
+                    }
+                });
+            }
+        });
+        btn_talk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(5);
+                databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if(task.isSuccessful()){
+                            String kkanbu = String.valueOf(task.getResult().getValue());
+                            getKkanbu(firebaseUser);
+                            if(kkanbu.equals("")) no_showDialog();
+                            else yes_showDialog();
+                        } else{
+                            Log.d("실패했음", " ");
+                        }
+                    }
+                });
+            }
+        });
+        btn_random.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(6);
                 databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
