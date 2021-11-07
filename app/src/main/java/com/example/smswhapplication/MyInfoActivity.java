@@ -8,13 +8,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,6 +34,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
 
 public class MyInfoActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
@@ -101,7 +109,7 @@ public class MyInfoActivity extends AppCompatActivity {
         navigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
 
         firebaseStorage = FirebaseStorage.getInstance();
-        storageReference = firebaseStorage.getReference().child("UserProfile");
+        storageReference = firebaseStorage.getReference().child("Userprofile");
 
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
@@ -110,6 +118,7 @@ public class MyInfoActivity extends AppCompatActivity {
         tv_mybday = findViewById(R.id.tv_mybday);
         tv_mymajor = findViewById(R.id.tv_mymajor);
         tv_mynum = findViewById(R.id.tv_mynum);
+        iv_myprofile = findViewById(R.id.iv_myprofile);
 
         ValueEventListener valueEventListener = new ValueEventListener() {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -119,6 +128,23 @@ public class MyInfoActivity extends AppCompatActivity {
                 tv_mybday.setText(user.getBirthday());
                 tv_mymajor.setText(user.getMajor());
                 tv_mynum.setText(user.getStuNum());
+
+                String uid = firebaseUser.getUid();;
+                StorageReference profileRef = storageReference.child(uid);
+                profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Glide.with(getApplicationContext()).load(uri).into(iv_myprofile);
+                        HashMap<String,Object> userMap = new HashMap<>();
+                        userMap.put("profileURL",uri.toString());
+                        databaseReference.child("UserAccount/"+uid).updateChildren(userMap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        Log.d("실패했음", e.getMessage());
+                    }
+                });
             }
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e("파이어베이스", "Error getting data");
