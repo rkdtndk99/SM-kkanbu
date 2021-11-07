@@ -55,7 +55,7 @@ public class MatchingStartActivity extends AppCompatActivity {
         btn_match.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MatchingStartActivity.this, MatchAgeActivity.class);
+                Intent i = new Intent(MatchingStartActivity.this, MatchInterestActivity.class);
                 startActivity(i);
                 overridePendingTransition(0, 0);
                 finish();
