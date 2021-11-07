@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     public UserAccount KKANBU = new UserAccount();
 
     EditText login_email, login_pw;
-    ImageButton btn_login, btn_to_signup;
+    Button btn_login, btn_to_signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
