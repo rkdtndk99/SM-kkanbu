@@ -13,6 +13,7 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -37,7 +38,7 @@ public class SignUpActivity extends AppCompatActivity {
     private StorageReference storageReference;
 
     EditText signup_name, signup_birth, signup_major, signup_stunum, signup_email, signup_pw;
-    Button btn_signup;
+    ImageButton btn_signup;
     ImageView signup_img;
     Uri imageUri;
 
