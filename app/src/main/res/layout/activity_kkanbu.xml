@@ -4,67 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/kback">
+    android:background="@drawable/kback"
+    tools:context=".KkanbuActivity">
+
+    <TextView
+        android:id="@+id/tv_myinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="50dp"
+        android:text="내 깐부"
+        android:textSize="30sp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/iv_kkanbu"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_myinfo"
         tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/kkanbu_major"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.237"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/kkanbu_name" />
-
-    <TextView
-        android:id="@+id/kkanbu_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_kkanbu" />
-
-    <TextView
-        android:id="@+id/kkanbu_birthday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/kkanbu_name" />
-
-    <TextView
-        android:id="@+id/kkanbu_stunum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.739"
-        app:layout_constraintStart_toEndOf="@+id/kkanbu_major"
-        app:layout_constraintTop_toBottomOf="@+id/kkanbu_name" />
 
     <ImageButton
         android:id="@+id/chat_btn"
         android:layout_width="60dp"
         android:layout_height="55dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:src="@drawable/chatbubble"
         android:scaleType="fitXY"
         android:background="@android:color/transparent"
@@ -73,13 +43,50 @@
         app:layout_constraintTop_toBottomOf="@+id/iv_kkanbu" />
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/kkanbu_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My kkanbu"
+        android:layout_marginTop="30dp"
+        android:text="Kkanbu Name"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="40dp"
+        app:layout_constraintTop_toBottomOf="@+id/chat_btn" />
+
+    <TextView
+        android:id="@+id/kkanbu_major"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Kkanbu Major"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kkanbu_name"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/kkanbu_stunum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Kkanbu 학번"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kkanbu_major"
+        tools:ignore="MissingConstraints"/>
+
+    <TextView
+        android:id="@+id/kkanbu_birthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="깐부 생일"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kkanbu_stunum"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -92,7 +99,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/navigation_items"
-
         app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"/>
 

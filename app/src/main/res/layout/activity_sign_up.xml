@@ -12,12 +12,13 @@
         android:id="@+id/signup_img"
         android:layout_width="220dp"
         android:layout_height="220dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/add_user"
+        app:tint="@color/gray"/>
 
 
     <EditText
