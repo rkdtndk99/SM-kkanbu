@@ -12,8 +12,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -65,6 +68,7 @@ public class MyInfoActivity extends AppCompatActivity {
                         startActivity(intent1_2);
                     }
                     overridePendingTransition(0, 0);
+                    finish();
                     return true;
 
                 case R.id.icon_matching:
@@ -72,11 +76,13 @@ public class MyInfoActivity extends AppCompatActivity {
                         Intent intent1 = new Intent(MyInfoActivity.this, YesKkanbuActivity.class);
                         startActivity(intent1);
                         overridePendingTransition(0, 0);
+                        finish();
                     }
                     else{
                         Intent intent1 = new Intent(MyInfoActivity.this, MatchingStartActivity.class);
                         startActivity(intent1);
                         overridePendingTransition(0, 0);
+                        finish();
                     }
                     return true;
 
@@ -140,5 +146,18 @@ public class MyInfoActivity extends AppCompatActivity {
             }
         };
         databaseReference.child("UserAccount").child(firebaseUser.getUid()).addValueEventListener(valueEventListener);
+
+        final Button logout = findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 로그아웃
+                mFirebaseAuth.signOut();
+                Toast.makeText(MyInfoActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(MyInfoActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }

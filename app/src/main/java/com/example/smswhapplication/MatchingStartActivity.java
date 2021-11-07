@@ -49,12 +49,14 @@ public class MatchingStartActivity extends AppCompatActivity {
                         Intent intent1_2 = new Intent(MatchingStartActivity.this, NoKkanbuActivity.class);
                         startActivity(intent1_2);
                     }
+                    finish();
                     overridePendingTransition(0, 0);
                     return true;
                 case R.id.icon_me:
                     Intent intent2 = new Intent(MatchingStartActivity.this, MyInfoActivity.class);
                     startActivity(intent2);
                     overridePendingTransition(0, 0);
+                    finish();
                     return true;
                 default:
                     return true;

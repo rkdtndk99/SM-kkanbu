@@ -21,12 +21,14 @@ public class YesKkanbuActivity extends AppCompatActivity {
                     Intent intent1_1 = new Intent(YesKkanbuActivity.this, KkanbuActivity.class);
                     startActivity(intent1_1);
                     overridePendingTransition(0, 0);
+                    finish();
                     return true;
 
                 case R.id.icon_me:
                     Intent intent2 = new Intent(YesKkanbuActivity.this, MyInfoActivity.class);
                     startActivity(intent2);
                     overridePendingTransition(0, 0);
+                    finish();
                     return true;
 
                 default :
