@@ -45,7 +45,6 @@ public class MatchInterestActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private Vector<String> interest_v = new Vector<String>();
-    private Vector<String> age_v = new Vector<String>();
 
     Button btn_school, btn_career, btn_hobby, btn_food, btn_to_kkanbu;
     Dialog nokkanbu_dialog, yeskkanbu_dialog;
@@ -108,9 +107,7 @@ public class MatchInterestActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if(task.isSuccessful()){
                             String kkanbu = String.valueOf(task.getResult().getValue());
-                            Log.d("깐부 아이디", kkanbu);
                             getKkanbu(firebaseUser);
-                            getKkanbuAge(firebaseUser);
                             if(kkanbu.equals("")) no_showDialog();
                             else yes_showDialog();
                         } else{
@@ -124,21 +121,57 @@ public class MatchInterestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(2);
-                //alert dialog
+                databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if(task.isSuccessful()){
+                            String kkanbu = String.valueOf(task.getResult().getValue());
+                            getKkanbu(firebaseUser);
+                            if(kkanbu.equals("")) no_showDialog();
+                            else yes_showDialog();
+                        } else{
+                            Log.d("실패했음", " ");
+                        }
+                    }
+                });
             }
         });
         btn_hobby.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(3);
-                //alert dialog
+                databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if(task.isSuccessful()){
+                            String kkanbu = String.valueOf(task.getResult().getValue());
+                            getKkanbu(firebaseUser);
+                            if(kkanbu.equals("")) no_showDialog();
+                            else yes_showDialog();
+                        } else{
+                            Log.d("실패했음", " ");
+                        }
+                    }
+                });
             }
         });
         btn_food.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(4);
-                //alert dialog
+                databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if(task.isSuccessful()){
+                            String kkanbu = String.valueOf(task.getResult().getValue());
+                            getKkanbu(firebaseUser);
+                            if(kkanbu.equals("")) no_showDialog();
+                            else yes_showDialog();
+                        } else{
+                            Log.d("실패했음", " ");
+                        }
+                    }
+                });
             }
         });
     }
@@ -212,21 +245,13 @@ public class MatchInterestActivity extends AppCompatActivity {
                         }
                     }
                     @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
+                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
                     @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                    }
+                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {}
                     @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
+                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
                     @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
+                    public void onCancelled(@NonNull DatabaseError databaseError) {}
                 });
             }
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -236,91 +261,19 @@ public class MatchInterestActivity extends AppCompatActivity {
         databaseReference.child("UserAccount").child(firebaseUser.getUid()).addValueEventListener(valueEventListener);
     }
 
-    public void getKkanbuAge(FirebaseUser firebaseUser) {
-        ValueEventListener valueEventListener2 = new ValueEventListener() {
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserAccount user1 = dataSnapshot.getValue(UserAccount.class);
-                Integer age = user1.getAge();
-                Integer studentNum = Integer.parseInt(user1.getStuNum().substring(0, 2));
-
-                Log.d("학번", String.valueOf(studentNum));
-
-                Log.d("선호하는 학번1", String.valueOf(age));
-                if(age == 1){   //선배 골랐을 때
-                    databaseReference.child("UserAccount").orderByChild("age").startAt(studentNum+1).addChildEventListener(new ChildEventListener() {
-                        @Override
-                        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                            if(!dataSnapshot.getKey().equals(user1.getIdToken())){
-                                Log.d("깐부 나이 키", dataSnapshot.getKey());
-                                matchAge(dataSnapshot.getKey());
-                            }
-                        }
-                        @Override
-                        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
-                        @Override
-                        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {}
-                        @Override
-                        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {}
-                    });
-                }
-                if(age==2){     //동기 골랐을 때
-                    databaseReference.child("UserAccount").orderByChild("age").equalTo(studentNum).addChildEventListener(new ChildEventListener() {
-                        @Override
-                        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                            if(!dataSnapshot.getKey().equals(user1.getIdToken())){
-                                matchAge(dataSnapshot.getKey());
-                            }
-                        }
-                        @Override
-                        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
-                        @Override
-                        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {}
-                        @Override
-                        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {}
-                    });
-                }
-                if(age==3){    //후배 골랐을 때
-                    databaseReference.child("UserAccount").orderByChild("age").endAt(studentNum).addChildEventListener(new ChildEventListener() {
-                        @Override
-                        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                            if(!dataSnapshot.getKey().equals(user1.getIdToken())){
-                                matchAge(dataSnapshot.getKey());
-                            }
-                        }
-                        @Override
-                        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
-                        @Override
-                        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {}
-                        @Override
-                        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {}
-                    });
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("파이어베이스", "Error getting data");
-            }
-        };
-        databaseReference.child("UserAccount").child(firebaseUser.getUid()).addValueEventListener(valueEventListener2);
-    }
-
     public void matchInterest(String s){
         interest_v.add(s);
-        for(int i=0; i<interest_v.size();i++){
-            Log.d("깐부 관심사 벡터", interest_v.get(i));
-        }
-    }
+        if(!interest_v.isEmpty()){
+            firebaseAuth = FirebaseAuth.getInstance();
+            databaseReference = FirebaseDatabase.getInstance().getReference("SMSWH");
+            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
-    public void matchAge(String s){
-        age_v.add(s);
-        for(int i=0; i<age_v.size();i++){
-            Log.d("깐부 나이 벡터", age_v.get(i));
+            String kkanbuToken = interest_v.get(0);
+            Log.d("깐부 저장 전 키", kkanbuToken);
+            databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").setValue(kkanbuToken);
+            Log.d("깐부 저장 후 키", kkanbuToken);
+        } else{
+            no_showDialog();
         }
     }
 }

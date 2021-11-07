@@ -5,15 +5,18 @@ import static java.lang.Thread.sleep;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 //import android.support.v7.app.AppCompatActivity;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -38,10 +41,36 @@ public class KkanbuActivity extends AppCompatActivity {
     private DatabaseReference databaseReference = firebaseDatabase.getReference("SMSWH");
     private DatabaseReference databaseReference2 = firebaseDatabase.getReference("SMSWH");
 
+    private final BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @SuppressLint("NonConstantResourceId")
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch(item.getItemId()){
+                case R.id.icon_matching:
+                    Intent intent1 = new Intent(KkanbuActivity.this, MatchingStartActivity.class);
+                    startActivity(intent1);
+                    overridePendingTransition(0, 0);
+                    finish();
+                    return true;
+                case R.id.icon_me:
+                    Intent intent2 = new Intent(KkanbuActivity.this, MyInfoActivity.class);
+                    startActivity(intent2);
+                    overridePendingTransition(0, 0);
+                    return true;
+                default:
+                    return true;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kkanbu);
+
+        @SuppressLint("ResourceType")
+        BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        navigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
 
         kkanbu_name = (TextView) findViewById(R.id.kkanbu_name);
         kkanbu_major = (TextView) findViewById(R.id.kkanbu_major);
