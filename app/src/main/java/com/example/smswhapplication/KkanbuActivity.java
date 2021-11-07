@@ -7,14 +7,19 @@ import androidx.appcompat.app.AppCompatActivity;
 //import android.support.v7.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,15 +33,20 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+
 public class KkanbuActivity extends AppCompatActivity {
 
     private TextView kkanbu_name, kkanbu_major, kkanbu_stunum, kkanbu_birthday;
     private ImageButton chat_btn;
     private String usernum = "", chatname = "", username = ".", kkanbuUid = "";
+    private ImageView iv_kkanbu;
 
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseStorage storage = FirebaseStorage.getInstance();
-    private StorageReference storageReference = storage.getReference().child("UserProfile");
+    private StorageReference storageReference = storage.getReference().child("Userprofile");
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference("SMSWH");
     private DatabaseReference databaseReference2 = firebaseDatabase.getReference("SMSWH");
@@ -77,6 +87,7 @@ public class KkanbuActivity extends AppCompatActivity {
         kkanbu_birthday = (TextView) findViewById(R.id.kkanbu_birthday);
         kkanbu_stunum = (TextView) findViewById(R.id.kkanbu_stunum);
         chat_btn = (ImageButton) findViewById(R.id.chat_btn);
+        iv_kkanbu = findViewById(R.id.iv_kkanbu);
 
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
@@ -106,6 +117,23 @@ public class KkanbuActivity extends AppCompatActivity {
                         kkanbu_major.setText(n);
                         kkanbu_stunum.setText(s);
                         Log.i("0000000", s);
+
+                        Log.d("깐부 아이디", kkanbuUid);
+                        StorageReference profileRef = storageReference.child(kkanbuUid);
+                        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Glide.with(getApplicationContext()).load(uri).into(iv_kkanbu);
+                                HashMap<String,Object> userMap = new HashMap<>();
+                                userMap.put("profileURL",uri.toString());
+                                databaseReference.child("UserAccount/"+ kkanbuUid).updateChildren(userMap);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull @NotNull Exception e) {
+                                Log.d("실패했음", e.getMessage());
+                            }
+                        });
 
                         if (Integer.parseInt(usernum) > Integer.parseInt(kkanbu_stunum.getText().toString()))
                             chatname = usernum;
