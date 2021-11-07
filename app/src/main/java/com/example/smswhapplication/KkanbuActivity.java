@@ -57,10 +57,9 @@ public class KkanbuActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch(item.getItemId()){
                 case R.id.icon_matching:
-                    Intent intent1 = new Intent(KkanbuActivity.this, MatchingStartActivity.class);
+                    Intent intent1 = new Intent(KkanbuActivity.this, YesKkanbuActivity.class);
                     startActivity(intent1);
                     overridePendingTransition(0, 0);
-                    finish();
                     return true;
                 case R.id.icon_me:
                     Intent intent2 = new Intent(KkanbuActivity.this, MyInfoActivity.class);

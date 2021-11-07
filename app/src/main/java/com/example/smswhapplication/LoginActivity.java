@@ -27,9 +27,6 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
 
-    public UserAccount USER = new UserAccount();
-    public UserAccount KKANBU = new UserAccount();
-
     EditText login_email, login_pw;
     Button btn_login, btn_to_signup;
 
