@@ -9,6 +9,6 @@ public class NoKkanbuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_no_kkanbu_avtivity);
+        setContentView(R.layout.activity_no_kkanbu);
     }
 }

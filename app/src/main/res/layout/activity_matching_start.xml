@@ -7,11 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".MatchingStartActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <ImageButton
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
         android:text="Matching Start!"
         android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:src="@drawable/hand"
         android:id="@+id/btn_match"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -20,6 +24,7 @@
         android:layout_gravity="bottom"
         android:id="@+id/navigation"
         app:menu="@menu/navigation_items"
+        app:itemBackground="@color/green"
         app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"/>
 

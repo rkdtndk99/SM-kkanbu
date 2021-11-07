@@ -11,13 +11,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MatchingStartActivity extends AppCompatActivity {
 
-    Button btn_match;
+    ImageButton btn_match;
 
     private final BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @SuppressLint("NonConstantResourceId")

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     public UserAccount KKANBU = new UserAccount();
 
     EditText login_email, login_pw;
-    Button btn_login, btn_to_signup;
+    ImageButton btn_login, btn_to_signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +42,12 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("SMSWH");
 
-//        if(user!=null){
-//            Intent intent=new Intent(this, MainActivity.class);
-//            startActivity(intent);
-//            finish();
-//
-//        }
+        if(user!=null){
+            Intent intent=new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+
+        }
 
         login_email = findViewById(R.id.login_email);
         login_pw = findViewById(R.id.login_pw);
