@@ -16,6 +16,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="당신의 관심사를 선택하세요"
+            android:paddingBottom="20dp"
+            android:layout_gravity="center"
+            android:textSize="25sp"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,17 +32,23 @@
             <Button
                 android:id="@+id/btn_school"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
+                android:background="@drawable/button_corners"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:text="학업" />
+                android:paddingTop="15dp"
+                android:drawableTop="@drawable/bookxml"
+                android:text="학업"/>
 
             <Button
                 android:id="@+id/btn_career"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
+                android:background="@drawable/button_corners"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:paddingTop="15dp"
+                android:drawableTop="@drawable/careerxml"
                 android:text="취업" />
         </LinearLayout>
 
@@ -46,17 +60,23 @@
             <Button
                 android:id="@+id/btn_hobby"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
+                android:background="@drawable/button_corners"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:paddingTop="15dp"
+                android:drawableTop="@drawable/gamexml"
                 android:text="오락/취미" />
 
             <Button
                 android:id="@+id/btn_food"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
+                android:background="@drawable/button_corners"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:paddingTop="15dp"
+                android:drawableTop="@drawable/foodxml"
                 android:text="맛집 탐방" />
         </LinearLayout>
 
@@ -68,17 +88,23 @@
             <Button
                 android:id="@+id/btn_talk"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
+                android:background="@drawable/button_corners"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:text="인생 이야기" />
+                android:paddingTop="15dp"
+                android:drawableTop="@drawable/secretxml"
+                android:text="비밀 이야기" />
 
             <Button
                 android:id="@+id/btn_random"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
+                android:background="@drawable/button_corners"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:paddingTop="15dp"
+                android:drawableTop="@drawable/songxml"
                 android:text="아무거나 좋아!" />
         </LinearLayout>
 
