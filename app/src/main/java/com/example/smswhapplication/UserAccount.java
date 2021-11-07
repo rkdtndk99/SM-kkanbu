@@ -8,7 +8,6 @@ public class UserAccount {
     private String stuNum;
     private String email;
     private String pw;
-    private String profileUri;
     private String kkanbu ;
     private Integer age;
     private Integer interest;
@@ -72,14 +71,6 @@ public class UserAccount {
 
     public void setPw(String pw) {
         this.pw = pw;
-    }
-
-    public String getProfileUri() {
-        return profileUri;
-    }
-
-    public void setProfileUri(String profileUri) {
-        this.profileUri = profileUri;
     }
 
     public Integer getAge() {

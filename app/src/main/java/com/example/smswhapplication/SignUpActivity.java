@@ -102,7 +102,6 @@ public class SignUpActivity extends AppCompatActivity {
                                         user.setStuNum(signup_stunum.getText().toString());
                                         user.setEmail(firebaseUser.getEmail());
                                         user.setPw(signup_pw.getText().toString());
-                                        user.setProfileUri("");
                                         user.setKkanbu("");
                                         //아직 저장되지 않은 값 초기화
                                         user.setAge(0);

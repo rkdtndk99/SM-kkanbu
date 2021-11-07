@@ -55,44 +55,40 @@ public class MyInfoActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
-            databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (!task.isSuccessful()) {
-                        Log.e("firebase", "Error getting data", task.getException());
-                        kkanbuUid = "";
-                    }
-                    else {
-                        kkanbuUid = String.valueOf(task.getResult().getValue());
-                    }
-                }
-            });
-            Log.i("KkanbuUid", kkanbuUid);
+//            databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                    if (!task.isSuccessful()) {
+//                        Log.e("firebase", "Error getting data", task.getException());
+//                        kkanbuUid = "";
+//                    }
+//                    else {
+//                        kkanbuUid = String.valueOf(task.getResult().getValue());
+//                    }
+//                }
+//            });
             switch(item.getItemId()){
-                case R.id.icon_kkanbu:
-                    if(!kkanbuUid.equals("")) {
-                        Intent intent1_1 = new Intent(MyInfoActivity.this, KkanbuActivity.class);
-                        intent1_1.putExtra("kkanbu-uid", kkanbuUid);
-                        startActivity(intent1_1);
-                        overridePendingTransition(0, 0);
-                        finish();
-                        return true;
-                    }
-                    else{
-                        Intent intent1_2 = new Intent(MyInfoActivity.this, NoKkanbuActivity.class);
-                        startActivity(intent1_2);
-                        overridePendingTransition(0, 0);
-                        finish();
-                        return true;
-                    }
-//                    overridePendingTransition(0, 0);
-//                    finish();
-//                    return true;
+//                case R.id.icon_kkanbu:
+//                    if(!kkanbuUid.equals("")) {
+//                        Intent intent1_1 = new Intent(MyInfoActivity.this, KkanbuActivity.class);
+//                        intent1_1.putExtra("kkanbu-uid", kkanbuUid);
+//                        startActivity(intent1_1);
+//                        overridePendingTransition(0, 0);
+//                        finish();
+//                        return true;
+//                    }
+//                    else{
+//                        Intent intent1_2 = new Intent(MyInfoActivity.this, NoKkanbuActivity.class);
+//                        startActivity(intent1_2);
+//                        overridePendingTransition(0, 0);
+//                        finish();
+//                        return true;
+//                    }
                 case R.id.icon_matching:
                     Intent intent2 = new Intent(MyInfoActivity.this, MatchingStartActivity.class);
                     startActivity(intent2);
                     overridePendingTransition(0, 0);
-
+                    finish();
                     return true;
             }
             return false;
