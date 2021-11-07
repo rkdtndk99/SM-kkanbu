@@ -26,12 +26,14 @@ public class NoKkanbuActivity extends AppCompatActivity {
                     Intent intent2 = new Intent(NoKkanbuActivity.this, MyInfoActivity.class);
                     startActivity(intent2);
                     overridePendingTransition(0, 0);
+                    finish();
                     return true;
 
                 case R.id.icon_matching:
                     Intent intent1 = new Intent(NoKkanbuActivity.this, MatchingStartActivity.class);
                     startActivity(intent1);
                     overridePendingTransition(0, 0);
+                    finish();
 
                     return true;
 
