@@ -68,9 +68,16 @@ public class MyInfoActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.icon_matching:
-                    Intent intent2 = new Intent(MyInfoActivity.this, MatchingStartActivity.class);
-                    startActivity(intent2);
-                    overridePendingTransition(0, 0);
+                    if(kkanbuUid!=""){
+                        Intent intent1 = new Intent(MyInfoActivity.this, YesKkanbuActivity.class);
+                        startActivity(intent1);
+                        overridePendingTransition(0, 0);
+                    }
+                    else{
+                        Intent intent1 = new Intent(MyInfoActivity.this, MatchingStartActivity.class);
+                        startActivity(intent1);
+                        overridePendingTransition(0, 0);
+                    }
                     return true;
 
                 default :
