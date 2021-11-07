@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/kback">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/iv_kkanbu"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_kkanbu" />
 
     <TextView
         android:id="@+id/kkanbu_birthday"
@@ -61,14 +62,15 @@
 
     <ImageButton
         android:id="@+id/chat_btn"
-        android:layout_width="57dp"
-        android:layout_height="53dp"
+        android:layout_width="60dp"
+        android:layout_height="55dp"
         android:layout_marginTop="50dp"
-        android:src="@drawable/chat"
+        android:src="@drawable/chatbubble"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_kkanbu" />
 
     <TextView
         android:id="@+id/text"
@@ -85,8 +87,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:id="@+id/navigation"
+        app:itemBackground="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/navigation_items"
-        app:itemBackground="@color/green"
+
         app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"/>
 
