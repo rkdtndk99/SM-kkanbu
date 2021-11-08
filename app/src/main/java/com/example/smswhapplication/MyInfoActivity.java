@@ -123,7 +123,7 @@ public class MyInfoActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.icon_kkanbu:
-                        if(kkanbuUid!="") {
+                        if(!kkanbuUid.equals("")) {
                             Intent intent1_1 = new Intent(MyInfoActivity.this, KkanbuActivity.class);
                             startActivity(intent1_1);
                             overridePendingTransition(0, 0);
@@ -138,7 +138,7 @@ public class MyInfoActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.icon_matching:
-                        if(kkanbuUid!=""){
+                        if(!kkanbuUid.equals("")){
                             Intent intent1 = new Intent(MyInfoActivity.this, YesKkanbuActivity.class);
                             startActivity(intent1);
                             overridePendingTransition(0, 0);
