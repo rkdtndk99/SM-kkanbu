@@ -50,7 +50,7 @@ public class MyInfoActivity extends AppCompatActivity {
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
 
-    String kkanbuUid="";
+    private String kkanbuUid="";
     TextView tv_myname, tv_email, tv_mybday, tv_mymajor, tv_mynum, kkanbu;
     ImageView iv_myprofile;
 
@@ -99,11 +99,7 @@ public class MyInfoActivity extends AppCompatActivity {
                 Log.e("파이어베이스", "Error getting data");
             }
         };
-        databaseReference.child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(valueEventListener);
-
-        @SuppressLint("ResourceType")
-        BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.navigation);
-        navigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
+        databaseReference.child("UserAccount").child(firebaseUser.getUid()).addValueEventListener(valueEventListener);
 
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference().child("Userprofile");
@@ -121,46 +117,51 @@ public class MyInfoActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.icon_kkanbu:
+                        if(kkanbuUid!="") {
+                            Intent intent1_1 = new Intent(MyInfoActivity.this, KkanbuActivity.class);
+                            startActivity(intent1_1);
+                            overridePendingTransition(0, 0);
+                            finish();
+                        }
+                        else{
+                            Intent intent1_2 = new Intent(MyInfoActivity.this, NoKkanbuActivity.class);
+                            startActivity(intent1_2);
+                            overridePendingTransition(0, 0);
+                            finish();
+                        }
+                        return true;
+
+                    case R.id.icon_matching:
+                        if(kkanbuUid!=""){
+                            Intent intent1 = new Intent(MyInfoActivity.this, YesKkanbuActivity.class);
+                            startActivity(intent1);
+                            overridePendingTransition(0, 0);
+                            finish();
+                        }
+                        else{
+                            Intent intent1 = new Intent(MyInfoActivity.this, MatchingStartActivity.class);
+                            startActivity(intent1);
+                            overridePendingTransition(0, 0);
+                            finish();
+                        }
+                        return true;
+
+                    default :
+                        return false;
+
+                }
+            }
+        };
+
+        @SuppressLint("ResourceType")
+        BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        navigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch(item.getItemId()){
-                case R.id.icon_kkanbu:
-                    if(kkanbuUid!="") {
-                        Intent intent1_1 = new Intent(MyInfoActivity.this, KkanbuActivity.class);
-                        startActivity(intent1_1);
-                        overridePendingTransition(0, 0);
-                        finish();
-                    }
-                    else{
-                        Intent intent1_2 = new Intent(MyInfoActivity.this, NoKkanbuActivity.class);
-                        startActivity(intent1_2);
-                        overridePendingTransition(0, 0);
-                        finish();
-                    }
-                    return true;
-
-                case R.id.icon_matching:
-                    if(kkanbuUid!=""){
-                        Intent intent1 = new Intent(MyInfoActivity.this, YesKkanbuActivity.class);
-                        startActivity(intent1);
-                        overridePendingTransition(0, 0);
-                        finish();
-                    }
-                    else{
-                        Intent intent1 = new Intent(MyInfoActivity.this, MatchingStartActivity.class);
-                        startActivity(intent1);
-                        overridePendingTransition(0, 0);
-                        finish();
-                    }
-                    return true;
-
-                default :
-                    return false;
-
-            }
-        }
-    };
 }

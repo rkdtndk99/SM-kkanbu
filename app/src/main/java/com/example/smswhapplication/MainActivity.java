@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference("SMSWH");
-    private String kkanbuUid="m";
+    private String kkanbuUid="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +30,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-        databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String a = snapshot.getValue(String.class);
-                kkanbuUid = a;
 //                new Handler().postDelayed(new Runnable() {
 //                    String a;
 //                    @Override
@@ -58,14 +57,12 @@ public class MainActivity extends AppCompatActivity {
                 if(a!=""){
                     System.out.println("왜... 여기..?");
                     System.out.println("ㅁㅁㅁㅁ???"+ kkanbuUid);
-                    Intent intent = new Intent(MainActivity.this, YesKkanbuActivity.class);
-                    startActivity(intent);
-                    finish();
+                    Intent intent1 = new Intent(MainActivity.this, YesKkanbuActivity.class);
+                    startActivity(intent1);
                 }
                 else{
                     Intent intent = new Intent(MainActivity.this, MatchingStartActivity.class);
                     startActivity(intent);
-                    finish();
                 }
             }
             @Override
