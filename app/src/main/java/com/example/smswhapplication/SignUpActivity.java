@@ -118,6 +118,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         Toast.makeText(SignUpActivity.this, "회원가입 성공!", Toast.LENGTH_SHORT).show();
                                         Intent intent2 = new Intent(SignUpActivity.this, LoginActivity.class);
                                         startActivity(intent2);
+                                        finish();
                                     } else {
                                         Log.d("error",task.getException().getMessage());
                                         Toast.makeText(SignUpActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();

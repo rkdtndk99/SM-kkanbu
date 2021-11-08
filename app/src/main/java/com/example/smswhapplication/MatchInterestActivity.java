@@ -48,7 +48,6 @@ public class MatchInterestActivity extends AppCompatActivity {
     private DatabaseReference databaseReference3;
     private Vector<String> interest_v = new Vector<String>();
     String kkanbuUid = "";
-    String kkanbui = "";
 
     Button btn_school, btn_career, btn_hobby, btn_food, btn_to_kkanbu, btn_random, btn_talk;
     Dialog nokkanbu_dialog, yeskkanbu_dialog;
@@ -89,13 +88,6 @@ public class MatchInterestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(1);
                 getKkanbu();
-                getkkanbuuid();
-                if(kkanbuUid.equals("")) {
-                    no_showDialog();
-                }
-                else{
-                    yes_showDialog();
-                }
             }
         });
         btn_career.setOnClickListener(new View.OnClickListener() {
@@ -103,13 +95,6 @@ public class MatchInterestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(2);
                 getKkanbu();
-                getkkanbuuid();
-                if(kkanbuUid.equals("")) {
-                    no_showDialog();
-                }
-                else{
-                    yes_showDialog();
-                }
             }
         });
         btn_hobby.setOnClickListener(new View.OnClickListener() {
@@ -117,13 +102,6 @@ public class MatchInterestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(3);
                 getKkanbu();
-                getkkanbuuid();
-                if(kkanbuUid.equals("")) {
-                    no_showDialog();
-                }
-                else{
-                    yes_showDialog();
-                }
             }
         });
         btn_food.setOnClickListener(new View.OnClickListener() {
@@ -131,13 +109,6 @@ public class MatchInterestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(4);
                 getKkanbu();
-                getkkanbuuid();
-                if(kkanbuUid.equals("")) {
-                    no_showDialog();
-                }
-                else{
-                    yes_showDialog();
-                }
             }
         });
         btn_talk.setOnClickListener(new View.OnClickListener() {
@@ -145,13 +116,6 @@ public class MatchInterestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(5);
                 getKkanbu();
-                getkkanbuuid();
-                if(kkanbuUid.equals("")) {
-                    no_showDialog();
-                }
-                else{
-                    yes_showDialog();
-                }
             }
         });
         btn_random.setOnClickListener(new View.OnClickListener() {
@@ -159,12 +123,6 @@ public class MatchInterestActivity extends AppCompatActivity {
             public void onClick(View v) {
                 databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(6);
                 getKkanbu();
-                if(kkanbuUid.equals("")) {
-                    no_showDialog();
-                }
-                else{
-                    yes_showDialog();
-                }
             }
         });
     }
@@ -269,19 +227,20 @@ public class MatchInterestActivity extends AppCompatActivity {
                         if(!dataSnapshot.getKey().equals(firebaseUser.getUid()) && k_k.equals("")){      //본인 아이디 제외
                             Log.d("깐부 키", dataSnapshot.getKey());
                             interest_v.add(dataSnapshot.getKey());
-                            if(!interest_v.isEmpty()){
-                                DatabaseReference databaseReference;
-                                databaseReference = FirebaseDatabase.getInstance().getReference("SMSWH");
+                        }
+                        if(!interest_v.isEmpty()){
+                            DatabaseReference databaseReference;
+                            databaseReference = FirebaseDatabase.getInstance().getReference("SMSWH");
 
-                                String kkanbuToken = interest_v.get(0);
-                                Log.d("깐부 저장 전 키", kkanbuToken);
-                                databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").setValue(kkanbuToken);
-                                databaseReference.child("UserAccount").child(kkanbuToken).child("kkanbu").setValue(firebaseUser.getUid());
-                                Log.d("깐부 저장 후 키", kkanbuToken);
-                                kkanbuUid = kkanbuToken;
-                            } else{
-                                no_showDialog();
-                            }
+                            String kkanbuToken = interest_v.get(0);
+                            Log.d("깐부 저장 전 키", kkanbuToken);
+                            databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").setValue(kkanbuToken);
+                            databaseReference.child("UserAccount").child(kkanbuToken).child("kkanbu").setValue(firebaseUser.getUid());
+                            yes_showDialog();
+                            Log.d("깐부 저장 후 키", kkanbuToken);
+                        }
+                        else{
+                            no_showDialog();
                         }
                     }
                     @Override
@@ -301,22 +260,6 @@ public class MatchInterestActivity extends AppCompatActivity {
         databaseReference3.child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(valueEventListener);
     }
 
-//    public void matchInterest(String s){
-//        interest_v.add(s);
-//        if(!interest_v.isEmpty()){
-//            DatabaseReference databaseReference;
-//            databaseReference = FirebaseDatabase.getInstance().getReference("SMSWH");
-//            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-//
-//            String kkanbuToken = interest_v.get(0);
-//            Log.d("깐부 저장 전 키", kkanbuToken);
-//            databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").setValue(kkanbuToken);
-//            databaseReference.child("UserAccount").child(kkanbuToken).child("kkanbu").setValue(firebaseUser.getUid());
-//            Log.d("깐부 저장 후 키", kkanbuToken);
-//        } else{
-//            no_showDialog();
-//        }
-//    }
     public void getkkanbuuid() {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
