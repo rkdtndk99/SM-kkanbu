@@ -11,7 +11,17 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class YesKkanbuActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_yes_kkanbu);
 
+
+        @SuppressLint("ResourceType")
+        BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        navigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
+
+    }
     private final BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @SuppressLint("NonConstantResourceId")
         @Override
@@ -37,15 +47,4 @@ public class YesKkanbuActivity extends AppCompatActivity {
             }
         }
     };
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_yes_kkanbu);
-
-
-        @SuppressLint("ResourceType")
-        BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.navigation);
-        navigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
-
-    }
 }

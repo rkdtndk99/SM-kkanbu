@@ -12,11 +12,35 @@ import android.widget.ImageButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 public class NoKkanbuActivity extends AppCompatActivity {
 
     private ImageButton btn;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_no_kkanbu);
+
+        btn = findViewById(R.id.btn_go);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NoKkanbuActivity.this, MatchingStartActivity.class);
+                startActivity(intent);
+                finish();
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        @SuppressLint("ResourceType")
+        BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        navigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
+    }
     private final BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @SuppressLint("NonConstantResourceId")
         @Override
@@ -43,24 +67,4 @@ public class NoKkanbuActivity extends AppCompatActivity {
             }
         }
     };
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_no_kkanbu);
-
-        btn.findViewById(R.id.btn_go);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(NoKkanbuActivity.this, MatchingStartActivity.class);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-            }
-        });
-
-        @SuppressLint("ResourceType")
-        BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.navigation);
-        navigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
-    }
 }

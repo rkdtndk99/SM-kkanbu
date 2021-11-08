@@ -46,66 +46,18 @@ public class MyInfoActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference("SMSWH");
+    private DatabaseReference databaseReference2 = firebaseDatabase.getReference("SMSWH");
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
 
-    private String kkanbuUid;
-    TextView tv_myname, tv_email, tv_mybday, tv_mymajor, tv_mynum;
+    String kkanbuUid="";
+    TextView tv_myname, tv_email, tv_mybday, tv_mymajor, tv_mynum, kkanbu;
     ImageView iv_myprofile;
-
-    private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-            switch(item.getItemId()){
-                case R.id.icon_kkanbu:
-                    if(kkanbuUid != "") {
-                        Intent intent1_1 = new Intent(MyInfoActivity.this, KkanbuActivity.class);
-                        startActivity(intent1_1);
-                    }
-                    else{
-                        Intent intent1_2 = new Intent(MyInfoActivity.this, NoKkanbuActivity.class);
-                        startActivity(intent1_2);
-                    }
-                    overridePendingTransition(0, 0);
-                    finish();
-                    return true;
-
-                case R.id.icon_matching:
-                    if(kkanbuUid!=""){
-                        Intent intent1 = new Intent(MyInfoActivity.this, YesKkanbuActivity.class);
-                        startActivity(intent1);
-                        overridePendingTransition(0, 0);
-                        finish();
-                    }
-                    else{
-                        Intent intent1 = new Intent(MyInfoActivity.this, MatchingStartActivity.class);
-                        startActivity(intent1);
-                        overridePendingTransition(0, 0);
-                        finish();
-                    }
-                    return true;
-
-                default :
-                    return false;
-
-            }
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_info);
-
-        @SuppressLint("ResourceType")
-        BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.navigation);
-        navigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
-
-        firebaseStorage = FirebaseStorage.getInstance();
-        storageReference = firebaseStorage.getReference().child("Userprofile");
-
-        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
         tv_myname = findViewById(R.id.tv_myname);
         tv_email = findViewById(R.id.tv_email);
@@ -113,7 +65,9 @@ public class MyInfoActivity extends AppCompatActivity {
         tv_mymajor = findViewById(R.id.tv_mymajor);
         tv_mynum = findViewById(R.id.tv_mynum);
         iv_myprofile = findViewById(R.id.iv_myprofile);
+        kkanbu = findViewById(R.id.kk);
 
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
         ValueEventListener valueEventListener = new ValueEventListener() {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount user = dataSnapshot.getValue(UserAccount.class);
@@ -145,7 +99,15 @@ public class MyInfoActivity extends AppCompatActivity {
                 Log.e("파이어베이스", "Error getting data");
             }
         };
-        databaseReference.child("UserAccount").child(firebaseUser.getUid()).addValueEventListener(valueEventListener);
+        databaseReference.child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(valueEventListener);
+
+        @SuppressLint("ResourceType")
+        BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        navigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
+
+        firebaseStorage = FirebaseStorage.getInstance();
+        storageReference = firebaseStorage.getReference().child("Userprofile");
+
 
         final Button logout = findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
@@ -160,4 +122,45 @@ public class MyInfoActivity extends AppCompatActivity {
             }
         });
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch(item.getItemId()){
+                case R.id.icon_kkanbu:
+                    if(kkanbuUid!="") {
+                        Intent intent1_1 = new Intent(MyInfoActivity.this, KkanbuActivity.class);
+                        startActivity(intent1_1);
+                        overridePendingTransition(0, 0);
+                        finish();
+                    }
+                    else{
+                        Intent intent1_2 = new Intent(MyInfoActivity.this, NoKkanbuActivity.class);
+                        startActivity(intent1_2);
+                        overridePendingTransition(0, 0);
+                        finish();
+                    }
+                    return true;
+
+                case R.id.icon_matching:
+                    if(kkanbuUid!=""){
+                        Intent intent1 = new Intent(MyInfoActivity.this, YesKkanbuActivity.class);
+                        startActivity(intent1);
+                        overridePendingTransition(0, 0);
+                        finish();
+                    }
+                    else{
+                        Intent intent1 = new Intent(MyInfoActivity.this, MatchingStartActivity.class);
+                        startActivity(intent1);
+                        overridePendingTransition(0, 0);
+                        finish();
+                    }
+                    return true;
+
+                default :
+                    return false;
+
+            }
+        }
+    };
 }

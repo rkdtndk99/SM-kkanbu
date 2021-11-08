@@ -20,11 +20,9 @@ import com.google.firebase.storage.StorageReference;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
-    private FirebaseStorage storage = FirebaseStorage.getInstance();
-    private StorageReference storageReference = storage.getReference().child("Userprofile");
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference("SMSWH");
-    private String kkanbuUid;
+    private String kkanbuUid="m";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,23 +30,34 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-        ValueEventListener valueEventListener = new ValueEventListener() {
+        databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                kkanbuUid = snapshot.getValue(String.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-        databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").addValueEventListener(valueEventListener);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if(kkanbuUid!=""){
+                String a = snapshot.getValue(String.class);
+                kkanbuUid = a;
+//                new Handler().postDelayed(new Runnable() {
+//                    String a;
+//                    @Override
+//                    public void run() {
+//                        System.out.println("ㅁㅁㅁㅁ?"+ kkanbuUid);
+//                        a=kkanbuUid;
+//                        if(a!=""){
+//                            System.out.println("왜... 여기..?");
+//                            System.out.println("ㅁㅁㅁㅁ???"+ kkanbuUid);
+//                            Intent intent = new Intent(MainActivity.this, YesKkanbuActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                        }
+//                        else{
+//                            Intent intent = new Intent(MainActivity.this, MatchingStartActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                        }
+//                    }
+//                }, 1500);
+                if(a!=""){
+                    System.out.println("왜... 여기..?");
+                    System.out.println("ㅁㅁㅁㅁ???"+ kkanbuUid);
                     Intent intent = new Intent(MainActivity.this, YesKkanbuActivity.class);
                     startActivity(intent);
                     finish();
@@ -59,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 }
             }
-        }, 1500);
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

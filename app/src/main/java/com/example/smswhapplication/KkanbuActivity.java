@@ -117,7 +117,6 @@ public class KkanbuActivity extends AppCompatActivity {
                         kkanbu_name.setText(user.getName());
                         kkanbu_major.setText(n);
                         kkanbu_stunum.setText(s);
-                        Log.i("0000000", s);
 
                         Log.d("깐부 아이디", kkanbuUid);
                         StorageReference profileRef = storageReference.child(kkanbuUid);
