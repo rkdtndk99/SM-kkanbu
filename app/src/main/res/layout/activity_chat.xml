@@ -5,42 +5,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/nkback"
-    tools:context="com.weet.weet.ChatActivity">
+    tools:context=".ChatActivity">
 
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chat_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_above="@id/chat_edit"
+        android:layout_marginHorizontal="17dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
 
-        <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/chat_edit"
+        android:layout_width="280dp"
+        android:layout_height="47dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="20dp"
+        android:layout_toStartOf="@id/chat_send"
+        android:background="@drawable/edittext_design"
+        android:hint="메시지를 입력하세요"
+        android:textSize="16sp" />
 
-            <ListView
-                android:id="@+id/chat_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/chat_sent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="send" />
-
-            <EditText
-                android:id="@+id/chat_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/chat_send"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/send"
+        android:padding="10dp"
+        android:text="전송"
+        android:textSize="16sp"
+        android:textColor="#393939" />
 
 </RelativeLayout>

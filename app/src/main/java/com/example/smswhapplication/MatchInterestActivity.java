@@ -44,6 +44,7 @@ import java.util.Vector;
 public class MatchInterestActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference2;
     private Vector<String> interest_v = new Vector<String>();
 
     Button btn_school, btn_career, btn_hobby, btn_food, btn_to_kkanbu, btn_random, btn_talk;
@@ -83,6 +84,7 @@ public class MatchInterestActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("SMSWH");
+        databaseReference2 = FirebaseDatabase.getInstance().getReference("SMSWH");
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
         btn_school = findViewById(R.id.btn_school);
@@ -271,6 +273,7 @@ public class MatchInterestActivity extends AppCompatActivity {
     }
 
     public void getKkanbu(FirebaseUser firebaseUser){
+
         ValueEventListener valueEventListener = new ValueEventListener() {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount user = dataSnapshot.getValue(UserAccount.class);
@@ -279,7 +282,9 @@ public class MatchInterestActivity extends AppCompatActivity {
                 databaseReference.child("UserAccount").orderByChild("interest").equalTo(interest).addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        if(!dataSnapshot.getKey().equals(user.getIdToken())){      //본인 아이디 제외
+                        UserAccount k = dataSnapshot.getValue(UserAccount.class);
+                        String k_k = k.getKkanbu();
+                        if(!dataSnapshot.getKey().equals(user.getIdToken()) && k_k==""){      //본인 아이디 제외
                             Log.d("깐부 키", dataSnapshot.getKey());
                             matchInterest(dataSnapshot.getKey());
                         }
@@ -311,6 +316,7 @@ public class MatchInterestActivity extends AppCompatActivity {
             String kkanbuToken = interest_v.get(0);
             Log.d("깐부 저장 전 키", kkanbuToken);
             databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").setValue(kkanbuToken);
+            databaseReference.child("UserAccount").child(kkanbuToken).child("kkanbu").setValue(firebaseUser.getUid());
             Log.d("깐부 저장 후 키", kkanbuToken);
         } else{
             no_showDialog();
