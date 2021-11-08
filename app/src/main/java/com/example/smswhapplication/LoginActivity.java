@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
 
     EditText login_email, login_pw;
-    ImageButton btn_login, btn_to_signup;
+    Button btn_login, btn_to_signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +39,12 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("SMSWH");
 
-        if(user!=null){
-            Intent intent=new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
-
-        }
+//        if(user!=null){
+//            Intent intent=new Intent(this, MainActivity.class);
+//            startActivity(intent);
+//            finish();
+//
+//        }
 
         login_email = findViewById(R.id.login_email);
         login_pw = findViewById(R.id.login_pw);

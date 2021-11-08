@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/icon_matching"
-        android:title="Matching"
-        android:icon="@drawable/promise2"
+        android:title="매칭"
+        android:icon="@drawable/clover"
         app:showAsAction="always"
         />
     <item
         android:id="@+id/icon_kkanbu"
-        android:title="My Kkanbu"
-        android:icon="@drawable/greeting_two"
+        android:title="깐부"
+        android:icon="@drawable/leaf"
         app:showAsAction="always"/>
     <item
         android:id="@+id/icon_me"
-        android:title="My Info"
-        android:icon="@drawable/greeting_alone"
+        android:title="나"
+        android:icon="@drawable/leaf_1"
         app:showAsAction="always"/>
 </menu>

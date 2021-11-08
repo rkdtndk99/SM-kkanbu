@@ -34,7 +34,7 @@
                 android:id="@+id/tv_dialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="아직 깐부가 나타나지 않았어요😭"
+                android:text="아직 깐부가 나타나지 않았어요..."
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:layout_marginTop="30dp"
@@ -52,7 +52,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_dialog"
                 app:lottie_autoPlay="true"
-                app:lottie_rawRes="@raw/fireworks" />
+                app:lottie_rawRes="@raw/sad_face" />
 
             <Button
                 android:id="@+id/btn_to_kkanbu"
@@ -61,7 +61,9 @@
                 android:text="다시 매칭해보기!"
                 android:textSize="17sp"
                 android:textStyle="bold"
+                android:paddingHorizontal="30dp"
                 android:layout_margin="10dp"
+                android:background="@drawable/button_corners2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
