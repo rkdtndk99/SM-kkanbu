@@ -45,33 +45,13 @@ public class MatchInterestActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private DatabaseReference databaseReference2;
+    private DatabaseReference databaseReference3;
     private Vector<String> interest_v = new Vector<String>();
+    String kkanbuUid = "";
 
     Button btn_school, btn_career, btn_hobby, btn_food, btn_to_kkanbu, btn_random, btn_talk;
     Dialog nokkanbu_dialog, yeskkanbu_dialog;
     ImageView iv_closeDialog;
-
-    private final BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch(item.getItemId()){
-                case R.id.icon_kkanbu:
-                    Intent intent1 = new Intent(MatchInterestActivity.this, KkanbuActivity.class);
-                    startActivity(intent1);
-                    overridePendingTransition(0, 0);
-                    finish();
-                    return true;
-                case R.id.icon_me:
-                    Intent intent2 = new Intent(MatchInterestActivity.this, MyInfoActivity.class);
-                    startActivity(intent2);
-                    overridePendingTransition(0, 0);
-                    finish();
-                    return true;
-                default:
-                    return true;
-            }
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +65,7 @@ public class MatchInterestActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("SMSWH");
         databaseReference2 = FirebaseDatabase.getInstance().getReference("SMSWH");
+        databaseReference3 = FirebaseDatabase.getInstance().getReference("SMSWH");
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
         btn_school = findViewById(R.id.btn_school);
@@ -106,118 +87,82 @@ public class MatchInterestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(1);
-                databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if(task.isSuccessful()){
-                            String kkanbu = String.valueOf(task.getResult().getValue());
-                            getKkanbu(firebaseUser);
-                            if(kkanbu.equals("")) no_showDialog();
-                            else yes_showDialog();
-                        } else{
-                            Log.d("실패했음", " ");
-                        }
-                    }
-                });
+                getKkanbu();
+                show();
             }
         });
         btn_career.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(2);
-                databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if(task.isSuccessful()){
-                            String kkanbu = String.valueOf(task.getResult().getValue());
-                            getKkanbu(firebaseUser);
-                            if(kkanbu.equals("")) no_showDialog();
-                            else yes_showDialog();
-                        } else{
-                            Log.d("실패했음", " ");
-                        }
-                    }
-                });
+                getKkanbu();
+                show();
             }
         });
         btn_hobby.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(3);
-                databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if(task.isSuccessful()){
-                            String kkanbu = String.valueOf(task.getResult().getValue());
-                            getKkanbu(firebaseUser);
-                            if(kkanbu.equals("")) no_showDialog();
-                            else yes_showDialog();
-                        } else{
-                            Log.d("실패했음", " ");
-                        }
-                    }
-                });
+                getKkanbu();
+                show();
             }
         });
         btn_food.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(4);
-                databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if(task.isSuccessful()){
-                            String kkanbu = String.valueOf(task.getResult().getValue());
-                            getKkanbu(firebaseUser);
-                            if(kkanbu.equals("")) no_showDialog();
-                            else yes_showDialog();
-                        } else{
-                            Log.d("실패했음", " ");
-                        }
-                    }
-                });
+                getKkanbu();
+                show();
             }
         });
         btn_talk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(5);
-                databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if(task.isSuccessful()){
-                            String kkanbu = String.valueOf(task.getResult().getValue());
-                            getKkanbu(firebaseUser);
-                            if(kkanbu.equals("")) no_showDialog();
-                            else yes_showDialog();
-                        } else{
-                            Log.d("실패했음", " ");
-                        }
-                    }
-                });
+                getKkanbu();
+                show();
             }
         });
         btn_random.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("interest").setValue(6);
-                databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if(task.isSuccessful()){
-                            String kkanbu = String.valueOf(task.getResult().getValue());
-                            getKkanbu(firebaseUser);
-                            if(kkanbu.equals("")) no_showDialog();
-                            else yes_showDialog();
-                        } else{
-                            Log.d("실패했음", " ");
-                        }
-                    }
-                });
+                getKkanbu();
+                show();
             }
         });
     }
 
+    private final BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch(item.getItemId()){
+                case R.id.icon_matching:
+                    getkkanbuuid();
+                    if(!kkanbuUid.equals("")){
+                        Intent intent1 = new Intent(MatchInterestActivity.this, YesKkanbuActivity.class);
+                        startActivity(intent1);
+                        overridePendingTransition(0, 0);
+                        finish();
+                    }
+                    else {
+                        Intent intent1 = new Intent(MatchInterestActivity.this, MatchingStartActivity.class);
+                        startActivity(intent1);
+                        overridePendingTransition(0, 0);
+                        finish();
+                    }
+                    return true;
+                case R.id.icon_me:
+                    Intent intent2 = new Intent(MatchInterestActivity.this, MyInfoActivity.class);
+                    startActivity(intent2);
+                    overridePendingTransition(0, 0);
+                    finish();
+                    return true;
+                default:
+                    return false;
+            }
+        }
+    };
     public void no_showDialog(){
         nokkanbu_dialog.show();
         iv_closeDialog = nokkanbu_dialog.findViewById(R.id.iv_closeDialog);
@@ -272,21 +217,22 @@ public class MatchInterestActivity extends AppCompatActivity {
         finish();
     }
 
-    public void getKkanbu(FirebaseUser firebaseUser){
+    public void getKkanbu(){
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
         ValueEventListener valueEventListener = new ValueEventListener() {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount user = dataSnapshot.getValue(UserAccount.class);
                 Integer interest = user.getInterest();
 
-                databaseReference.child("UserAccount").orderByChild("interest").equalTo(interest).addChildEventListener(new ChildEventListener() {
+                databaseReference2.child("UserAccount").orderByChild("interest").equalTo(interest).addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                         UserAccount k = dataSnapshot.getValue(UserAccount.class);
                         String k_k = k.getKkanbu();
-                        if(!dataSnapshot.getKey().equals(user.getIdToken()) && k_k==""){      //본인 아이디 제외
+                        if(!dataSnapshot.getKey().equals(firebaseUser.getUid()) && k_k.equals("")){      //본인 아이디 제외
                             Log.d("깐부 키", dataSnapshot.getKey());
-                            matchInterest(dataSnapshot.getKey());
+                            interest_v.add(dataSnapshot.getKey());
                         }
                     }
                     @Override
@@ -297,29 +243,54 @@ public class MatchInterestActivity extends AppCompatActivity {
                     public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {}
+
                 });
             }
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e("파이어베이스", "Error getting data");
             }
         };
-        databaseReference.child("UserAccount").child(firebaseUser.getUid()).addValueEventListener(valueEventListener);
+        databaseReference3.child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(valueEventListener);
+
     }
 
-    public void matchInterest(String s){
-        interest_v.add(s);
+    public void getkkanbuuid() {
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String a = snapshot.getValue(String.class);
+                kkanbuUid = a;
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").addListenerForSingleValueEvent(valueEventListener);
+    }
+    public void show(){
+        int a;
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if(!interest_v.isEmpty()){
-            firebaseAuth = FirebaseAuth.getInstance();
+            a=1;
+            DatabaseReference databaseReference;
             databaseReference = FirebaseDatabase.getInstance().getReference("SMSWH");
-            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
             String kkanbuToken = interest_v.get(0);
             Log.d("깐부 저장 전 키", kkanbuToken);
             databaseReference.child("UserAccount").child(firebaseUser.getUid()).child("kkanbu").setValue(kkanbuToken);
             databaseReference.child("UserAccount").child(kkanbuToken).child("kkanbu").setValue(firebaseUser.getUid());
+
             Log.d("깐부 저장 후 키", kkanbuToken);
-        } else{
-            no_showDialog();
         }
+        else{
+            a=0;
+        }
+        if(a==1)
+            yes_showDialog();
+        else
+            no_showDialog();
     }
 }

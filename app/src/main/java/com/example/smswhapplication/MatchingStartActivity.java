@@ -35,35 +35,6 @@ public class MatchingStartActivity extends AppCompatActivity {
 
     private String kkanbuUid;
 
-    private final BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @SuppressLint("NonConstantResourceId")
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch(item.getItemId()){
-                case R.id.icon_kkanbu:
-                    if(kkanbuUid != "") {
-                        Intent intent1_1 = new Intent(MatchingStartActivity.this, KkanbuActivity.class);
-                        startActivity(intent1_1);
-                    }
-                    else{
-                        Intent intent1_2 = new Intent(MatchingStartActivity.this, NoKkanbuActivity.class);
-                        startActivity(intent1_2);
-                    }
-                    finish();
-                    overridePendingTransition(0, 0);
-                    return true;
-                case R.id.icon_me:
-                    Intent intent2 = new Intent(MatchingStartActivity.this, MyInfoActivity.class);
-                    startActivity(intent2);
-                    overridePendingTransition(0, 0);
-                    finish();
-                    return true;
-                default:
-                    return true;
-            }
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,4 +69,26 @@ public class MatchingStartActivity extends AppCompatActivity {
             }
         });
     }
+    private final BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @SuppressLint("NonConstantResourceId")
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch(item.getItemId()){
+                case R.id.icon_kkanbu:
+                    Intent intent1_2 = new Intent(MatchingStartActivity.this, NoKkanbuActivity.class);
+                    startActivity(intent1_2);
+                    overridePendingTransition(0, 0);
+                    finish();
+                    return true;
+                case R.id.icon_me:
+                    Intent intent2 = new Intent(MatchingStartActivity.this, MyInfoActivity.class);
+                    startActivity(intent2);
+                    overridePendingTransition(0, 0);
+                    finish();
+                    return true;
+                default:
+                    return true;
+            }
+        }
+    };
 }
