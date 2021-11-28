@@ -2,6 +2,12 @@
 
 [성과 - 본선 진출]
 
+
+[시연 영상](https://drive.google.com/file/d/1-76Y5uGJc5Xagm80LXhx88ok56qQQMle/view?usp=sharing) 
+
+[apk 다운로드 링크](https://drive.google.com/file/d/1phOlJCucOLb0Nz4D0doF9Qvafqdrf27l/view?usp=sharing) 
+
+
 ### 팀원 
 > 김영경, 강수아 
 
